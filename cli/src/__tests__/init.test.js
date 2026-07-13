@@ -185,4 +185,26 @@ describe('redrock init', () => {
     const mkdirCalls = mockFs.mkdirSync.mock.calls;
     expect(mkdirCalls[0][0]).toContain('my-redrock-bot');
   });
+
+  // ── Template flag ──
+
+  it('includes template name in redrock.json', async () => {
+    await init('test-bot', { token: BOT_TOKEN, template: 'broadcast' });
+
+    const writeCalls = mockFs.writeFileSync.mock.calls;
+    const redrockJson = getWrittenFile(writeCalls, 'redrock.json');
+    const rc = JSON.parse(redrockJson);
+    expect(rc.template).toBe('broadcast');
+  });
+
+  it('exits with error for unknown template', async () => {
+    await init('test-bot', { token: BOT_TOKEN, template: 'nonexistent' });
+
+    // Should not create any directories or files
+    expect(mockFs.mkdirSync).not.toHaveBeenCalled();
+    expect(mockFs.writeFileSync).not.toHaveBeenCalled();
+    expect(mockChalk.red).toHaveBeenCalledWith(
+      expect.stringContaining('Unknown template')
+    );
+  });
 });

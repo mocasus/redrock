@@ -66,6 +66,19 @@ program
   .description('Create a new Telegram bot project')
   .option('-t, --token <token>', 'Bot token from @BotFather')
   .option('-f, --framework <fw>', 'Framework: python-telegram-bot, grammy, telegraf', 'python-telegram-bot')
+  .option('--template <name>', 'Bot template: basic, broadcast, reminder, group_mod, echo_custom, api_poller', 'basic')
+  .addHelpText('after', () => `
+${chalk.dim('Templates:')}
+  ${chalk.cyan('basic')}       Simple /start + echo bot (default)
+  ${chalk.cyan('broadcast')}   Admin broadcast to subscribers
+  ${chalk.cyan('reminder')}    Set reminders via /remind <minutes> <message>
+  ${chalk.cyan('group_mod')}   Group moderation: /warn, /ban, /rules, spam filter
+  ${chalk.cyan('echo_custom')} Echo bot with custom /setreply rules
+  ${chalk.cyan('api_poller')}  Monitor URLs for status changes
+${chalk.dim('Examples:')}
+  $ redrock init my-bot -t <token>
+  $ redrock init my-bot -t <token> --template broadcast
+  $ redrock init my-group-bot -t <token> -f grammy --template group_mod`)
   .action((name, opts) => require('./commands/init')(name, opts));
 
 program
