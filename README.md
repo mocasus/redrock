@@ -10,9 +10,9 @@
 
 <p align="center">
   <a href="https://www.npmjs.com/package/@mocasus/redrock"><img src="https://img.shields.io/npm/v/@mocasus/redrock?color=C83C28&style=flat" /></a>
-  <a href="https://github.com/mocasus/redrock/blob/main/LICENSE"><img src="https://img.shields.io/badge/license-MIT-808080?style=flat" /></a>
-  <img src="https://img.shields.io/badge/node-%3E%3D18-808080?style=flat" />
-  <img src="https://img.shields.io/badge/platform-Vercel-808080?style=flat" />
+  <a href="https://github.com/mocasus/redrock/blob/main/LICENSE"><img src="https://img.shields.io/badge/license-MIT-2563eb?style=flat" /></a>
+  <img src="https://img.shields.io/badge/node-%3E%3D18-16a34a?style=flat" />
+  <img src="https://img.shields.io/badge/Vercel-171717?style=flat&logo=vercel" />
 </p>
 
 <p align="center">
