@@ -27,16 +27,23 @@ module.exports = async function init(name = 'my-redrock-bot', opts = {}) {
   fs.mkdirSync(projectDir);
   fs.mkdirSync(path.join(projectDir, 'api'));
 
+  // Determine webhook handler path per framework
+  const handlerPaths = {
+    'python-telegram-bot': 'api/webhook.py',
+    'grammy': 'api/webhook.ts',
+    'telegraf': 'api/webhook.js',
+  };
+  const handlerPath = handlerPaths[framework] || 'api/webhook.py';
+
   // Create vercel.json
   const projectName = path.basename(name);
   const vercelConfig = {
     name: projectName,
     functions: {
-      'api/webhook.py': { memory: 128, maxDuration: 10 }
+      [handlerPath]: { memory: 128, maxDuration: 10 }
     },
     env: {
-      BOT_TOKEN: '@redrock-bot-token',
-      ...(framework === 'python-telegram-bot' ? {} : {})
+      BOT_TOKEN: '@redrock-bot-token'
     }
   };
   fs.writeFileSync(

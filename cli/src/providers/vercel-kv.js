@@ -1,6 +1,8 @@
 /**
  * Vercel KV Provider — Redis-compatible REST API
  *
+ * API surface: connect(config), get(key), set(key, value), delete(key)
+ *
  * Env vars required:
  *   KV_REST_API_URL      — https://<store>.kv.vercel-storage.com
  *   KV_REST_API_TOKEN     — auth token
@@ -13,6 +15,19 @@ const https = require('https');
 const http = require('http');
 
 class VercelKV {
+  /**
+   * Factory: connect to Vercel KV with config or env vars.
+   * @param {Object} config - { url, token, readOnlyToken }
+   * @returns {VercelKV}
+   */
+  static connect(config = {}) {
+    return new VercelKV({
+      url: config.url || process.env.KV_REST_API_URL,
+      token: config.token || process.env.KV_REST_API_TOKEN,
+      readOnlyToken: config.readOnlyToken || process.env.KV_REST_API_READ_ONLY_TOKEN
+    });
+  }
+
   constructor(opts = {}) {
     this.url = opts.url || process.env.KV_REST_API_URL;
     this.token = opts.token || process.env.KV_REST_API_TOKEN;
@@ -71,12 +86,12 @@ class VercelKV {
   }
 
   /** Delete a key */
-  async del(key) {
+  async delete(key) {
     const result = await this._request('DELETE', `/del/${key}`);
     return result;
   }
 
-  /** List keys matching a pattern */
+  /** List keys matching a prefix */
   async list(prefix = '') {
     const result = await this._request('GET', `/list/${prefix}`);
     return result.data?.result || [];

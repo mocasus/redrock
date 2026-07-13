@@ -1,0 +1,11 @@
+{
+  "name": "redrock-telegraf-bot",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node api/webhook.js"
+  },
+  "dependencies": {
+    "telegraf": "^4.16.3"
+  }
+}

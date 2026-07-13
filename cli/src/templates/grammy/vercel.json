@@ -1,0 +1,12 @@
+{
+  "name": "redrock-grammy-bot",
+  "functions": {
+    "api/webhook.ts": {
+      "memory": 128,
+      "maxDuration": 10
+    }
+  },
+  "env": {
+    "BOT_TOKEN": "@redrock-bot-token"
+  }
+}

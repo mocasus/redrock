@@ -89,7 +89,8 @@ program
 program
   .command('db <action>')
   .description('Database setup: init, migrate')
-  .option('-t, --to <provider>', 'Target provider: supabase, firebase')
+  .option('-p, --provider <name>', 'Provider: vercel-kv, supabase, firebase', 'vercel-kv')
+  .option('-t, --to <provider>', 'Target provider for migrate: supabase, firebase')
   .action((action, opts) => require('./commands/db')(action, opts));
 
 program

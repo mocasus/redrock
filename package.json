@@ -4,7 +4,7 @@
   "description": "Deploy Telegram bots to Vercel in 60 seconds. No VPS, no monthly fees.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "keywords": [
     "telegram",
@@ -42,5 +42,8 @@
     "commander": "^15.0.0",
     "inquirer": "^8.2.7",
     "ora": "^5.4.1"
+  },
+  "devDependencies": {
+    "jest": "^30.4.2"
   }
 }
