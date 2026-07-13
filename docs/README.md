@@ -11,7 +11,7 @@
 ### 1. Install Redrock
 
 ```bash
-npm i -g redrock
+npm i -g @mocasus/redrock
 ```
 
 ### 2. Create Your Bot

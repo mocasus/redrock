@@ -8,7 +8,7 @@
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/npm/v/redrock?color=C83C28&style=flat-square" />
+  <img src="https://img.shields.io/npm/v/@mocasus/redrock?color=C83C28&style=flat-square" />
   <img src="https://img.shields.io/badge/license-MIT-blue?style=flat-square" />
   <img src="https://img.shields.io/badge/node-%3E%3D18-green?style=flat-square" />
   <img src="https://img.shields.io/badge/platform-Vercel-black?style=flat-square" />
@@ -27,7 +27,7 @@ You have a Telegram bot idea. Normally you'd need a VPS ($6/mo), configure nginx
 **Redrock makes it one command.** Your bot runs on Vercel's free tier — scales to zero when nobody's chatting, wakes up instantly on the next message. Zero cost, zero maintenance.
 
 ```bash
-npm i -g redrock
+npm i -g @mocasus/redrock
 redrock init my-bot -t YOUR_BOT_TOKEN
 cd my-bot && redrock deploy
 ```
@@ -58,7 +58,7 @@ Done. Open Telegram, send `/start`. Your bot is live.
 ### Install
 
 ```bash
-npm i -g redrock
+npm i -g @mocasus/redrock
 ```
 
 ### Create & Deploy
@@ -172,5 +172,5 @@ MIT
 ---
 
 <p align="center">
-  <sub>v0.1.0 · <a href="https://github.com/mocasus/redrock">GitHub</a> · <a href="https://www.npmjs.com/package/redrock">npm</a> · MIT</sub>
+  <sub>v0.1.0 · <a href="https://github.com/mocasus/redrock">GitHub</a> · <a href="https://www.npmjs.com/package/@mocasus/redrock">npm</a> · MIT</sub>
 </p>
