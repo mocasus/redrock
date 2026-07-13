@@ -21,6 +21,18 @@
 
 ---
 
+## What is Redrock?
+
+You have a Telegram bot idea. Normally you'd need a VPS ($6/mo), nginx, webhooks, SSL certs — just to reply "hello" to a message.
+
+**Redrock makes it one command.** 
+
+It scaffolds a Python bot (pure stdlib, zero pip deps), pushes it to Vercel's free tier, and auto-registers the webhook with Telegram. Your bot scales to zero when idle, wakes instantly on the next message, and costs nothing.
+
+No config files to wrestle with. No server to maintain. Just `redrock deploy`.
+
+---
+
 ## Install
 
 ```bash
