@@ -18,6 +18,8 @@
 npm i -g redrock
 ```
 
+[▶️ **Tonton demo**](docs/demo.mp4) — 60 detik dari init ke live
+
 ---
 
 ## Why

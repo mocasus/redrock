@@ -1,0 +1,3 @@
+# Redrock — Python Telegram Bot
+# Pure stdlib, zero pip installs needed.
+# Add dependencies here if you want advanced features (e.g. pyTelegramBotAPI).
