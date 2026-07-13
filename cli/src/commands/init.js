@@ -28,8 +28,9 @@ module.exports = async function init(name = 'my-redrock-bot', opts = {}) {
   fs.mkdirSync(path.join(projectDir, 'api'));
 
   // Create vercel.json
+  const projectName = path.basename(name);
   const vercelConfig = {
-    name: name,
+    name: projectName,
     functions: {
       'api/webhook.py': { memory: 128, maxDuration: 10 }
     },
