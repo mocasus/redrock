@@ -1,0 +1,31 @@
+{
+  "name": "redrock",
+  "version": "0.1.0",
+  "description": "Deploy Telegram bots to Vercel in 60 seconds. No VPS, no monthly fees.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "telegram",
+    "bot",
+    "vercel",
+    "serverless",
+    "deploy",
+    "webhook"
+  ],
+  "author": "mocasus",
+  "license": "MIT",
+  "directories": {
+    "doc": "docs"
+  },
+  "bin": {
+    "redrock": "./cli/src/index.js"
+  },
+  "dependencies": {
+    "chalk": "^4.1.2",
+    "commander": "^15.0.0",
+    "inquirer": "^8.2.7",
+    "ora": "^5.4.1"
+  }
+}

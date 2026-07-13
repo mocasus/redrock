@@ -1,0 +1,12 @@
+{
+  "name": "test-bot2",
+  "functions": {
+    "api/webhook.py": {
+      "memory": 128,
+      "maxDuration": 10
+    }
+  },
+  "env": {
+    "BOT_TOKEN": "@redrock-bot-token"
+  }
+}
