@@ -15,7 +15,10 @@ def send_message(chat_id, text, reply_markup=None):
     data = json.dumps(payload).encode()
     req = urllib.request.Request(url, data=data,
         headers={"Content-Type": "application/json"})
-    urllib.request.urlopen(req)
+    try:
+        urllib.request.urlopen(req)
+    except Exception as e:
+        print(f"[redrock] send_message failed: {e}", file=sys.stderr)
 
 class handler(BaseHTTPRequestHandler):
     def do_POST(self):
