@@ -5,7 +5,7 @@
 <h3 align="center">Redrock</h3>
 
 <p align="center">
-  Deploy Telegram bots to Vercel — no VPS, no fees, one command.
+  Turn Vercel into a free VPS for your Telegram bot.<br>No server. No fees. One command.
 </p>
 
 <p align="center">
