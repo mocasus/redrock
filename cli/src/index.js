@@ -23,7 +23,14 @@ program
 program
   .command('logs')
   .description('Stream Vercel deployment logs')
-  .action(() => require('./commands/logs')());
+  .option('-j, --json', 'JSON output')
+  .option('-n, --limit <n>', 'Max results', '50')
+  .option('-s, --since <time>', 'Start time (1h, 30m, ISO)')
+  .option('-q, --query <q>', 'Search query (e.g. "status:500 error")')
+  .option('--status-code <code>', 'Filter by HTTP status')
+  .option('--level <level>', 'Filter: error, warning, info, fatal')
+  .option('--no-follow', 'One-shot, don\'t stream')
+  .action((opts) => require('./commands/logs')(opts));
 
 program
   .command('db <action>')
