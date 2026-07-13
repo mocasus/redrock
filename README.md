@@ -1,19 +1,18 @@
 <p align="center">
-  <img src="assets/logo.png" alt="Redrock" width="80" />
+  <img src="assets/logo.png" width="100" /><br>
+  <h1>Redrock</h1>
+  <strong>Deploy Telegram bots to Vercel.<br>No VPS. No fees. One command.</strong>
 </p>
 
-<h1 align="center">Redrock</h1>
+---
 
-<p align="center">
-  Deploy Telegram bots to Vercel. <strong>No VPS. No fees. 60 seconds.</strong>
-</p>
+## Why
 
-<p align="center">
-  <img src="https://img.shields.io/badge/npm-redrock-red?style=flat" alt="npm">
-  <img src="https://img.shields.io/badge/runs%20on-Vercel-black?style=flat&logo=vercel" alt="Vercel">
-  <img src="https://img.shields.io/badge/cost-%240%2Fmonth-green?style=flat" alt="Cost">
-  <img src="https://img.shields.io/badge/license-MIT-blue?style=flat" alt="MIT">
-</p>
+A simple Telegram bot shouldn't need a $6/month server running 24/7. Vercel's serverless platform handles this for free — but setting up webhooks, configuring serverless functions, and registering with Telegram is tedious.
+
+**Redrock makes it one command.**
+
+---
 
 ## Quick Start
 
@@ -22,82 +21,68 @@ npx redrock init my-bot -t YOUR_BOT_TOKEN
 cd my-bot && npx redrock deploy
 ```
 
-Done. Bot is live. Try `/start`.
+That's it. Your bot is live. Open Telegram and send `/start`.
 
-**Prerequisites:** Node.js 18+, [@BotFather token](https://t.me/BotFather), [Vercel account](https://vercel.com) (free).
+**You need:** Node.js 18+, a [BotFather token](https://t.me/BotFather), and a free [Vercel account](https://vercel.com).
 
-## What It Does
+---
 
-Telegram bots don't need a VPS. Vercel's free serverless tier handles them perfectly — but deploying a webhook-based bot there is manual and annoying.
+## What you get
 
-Redrock automates everything: scaffold → config → deploy → register webhook. One tool, two commands, zero servers to maintain.
-
-## How It Works
+After `redrock init`, your project looks like this:
 
 ```
-Your laptop               Vercel                      Telegram
-    │                       │                            │
-    │  redrock init         │                            │
-    ├──────────────────────►│                            │
-    │  redrock deploy       │                            │
-    │  (generates files,    │                            │
-    │   pushes to Vercel)   │                            │
-    │                       │  POST /api/webhook (msg)   │
-    │                       │◄───────────────────────────│
-    │                       │  sendMessage (reply)       │
-    │                       ├───────────────────────────►│
+my-bot/
+├── api/webhook.py     ← your bot lives here (Python, zero dependencies)
+├── redrock.json       ← project config
+├── vercel.json        ← Vercel deploy settings
+└── .env.example
 ```
+
+The webhook handler handles messages, Vercel runs it on the edge, and Telegram delivers updates instantly. When nobody is chatting, it scales to zero — no cost.
+
+---
 
 ## Commands
 
 ```
-redrock init <name>           Create new bot project
-redrock deploy                Deploy to Vercel
-redrock logs                  Stream Vercel logs
-redrock db <init|migrate>     Database setup & migration
-redrock switch <webhook|poll> Toggle webhook/polling mode
+redrock init <name>           scaffold a new bot
+redrock deploy                push to Vercel, register webhook
+redrock logs                  stream live logs
+redrock db init               setup Vercel KV database
+redrock db migrate --to X     switch to Supabase or Firebase
+redrock switch <webhook|poll> change update mode
 ```
 
-## Project Output
-
-```
-my-bot/
-├── api/webhook.py     # Bot handler (Python, zero deps)
-├── redrock.json       # Your config
-├── vercel.json        # Vercel deploy config
-└── .env.example
-```
+---
 
 ## Frameworks
 
-- **python-telegram-bot** (Python stdlib, zero pip install) — available now
-- grammY (TypeScript) — coming soon
-- Telegraf (JavaScript) — coming soon
+Redrock generates a **Python** bot by default (pure stdlib, no pip install). TypeScript and JavaScript templates are on the way.
+
+---
 
 ## Database (optional)
 
-| Provider | Free Tier | Switch via |
-|----------|-----------|------------|
-| Vercel KV | 256 MB | default |
-| Supabase | 500 MB | `redrock db migrate --to supabase` |
-| Firebase | 1 GB | `redrock db migrate --to firebase` |
+Need to store user data or state? Redrock supports three backends:
 
-## Why Not a VPS?
+- **Vercel KV** (default) — 256 MB, simple key-value
+- **Supabase** — 500 MB PostgreSQL, free tier
+- **Firebase** — 1 GB Firestore, real-time
 
-| | VPS $6/mo | Redrock + Vercel |
+---
+
+## VPS vs Redrock
+
+| | VPS | Redrock |
 |---|---|---|
-| Cost | $72/year | $0/year |
-| Setup | 30 min | 60 sec |
-| Maintenance | You | Zero |
-| Sleep cost | Always paying | $0 when idle |
+| Price | $6+/month | $0 |
+| Setup | 30+ minutes | 60 seconds |
+| Maintenance | You handle it | None |
+| Downtime cost | Paying anyway | Free when idle |
 
-## Local Dev
-
-```bash
-vercel dev
-curl -X POST localhost:3000/api/webhook -H 'Content-Type: application/json' -d '{"message":{"chat":{"id":1},"text":"/start"}}'
-```
+---
 
 ## License
 
-MIT © [mocasus](https://github.com/mocasus)
+MIT
