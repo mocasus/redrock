@@ -87,7 +87,7 @@ import json, os, sys
 # TeleBot lightweight — no deps, pure stdlib
 # Install: pip install pyTelegramBotAPI (only if you need advanced features)
 
-BOT_TOKEN = os.environ.get("BOT_TOKEN", "${token}")
+BOT_TOKEN = os.environ.get("BOT_TOKEN", "YOUR_BOT_TOKEN")
 
 def send_message(chat_id, text):
     import urllib.request

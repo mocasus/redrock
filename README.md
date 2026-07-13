@@ -4,6 +4,20 @@
   <strong>Deploy Telegram bots to Vercel.<br>No VPS. No fees. One command.</strong>
 </p>
 
+<p align="center">
+  <img src="https://img.shields.io/badge/version-0.1.0-red?style=flat-square" />
+  <img src="https://img.shields.io/badge/license-MIT-blue?style=flat-square" />
+  <img src="https://img.shields.io/badge/node-%3E%3D18-green?style=flat-square" />
+</p>
+
+---
+
+## Install
+
+```bash
+npm i -g redrock
+```
+
 ---
 
 ## Why
@@ -86,3 +100,9 @@ Need to store user data or state? Redrock supports three backends:
 ## License
 
 MIT
+
+---
+
+<p align="center">
+  <sub>v0.1.0 · <a href="https://github.com/mocasus/redrock">GitHub</a> · MIT</sub>
+</p>

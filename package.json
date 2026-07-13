@@ -16,6 +16,21 @@
   ],
   "author": "mocasus",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mocasus/redrock.git"
+  },
+  "bugs": {
+    "url": "https://github.com/mocasus/redrock/issues"
+  },
+  "homepage": "https://github.com/mocasus/redrock#readme",
+  "engines": {
+    "node": ">=18"
+  },
+  "files": [
+    "cli/",
+    "assets/"
+  ],
   "directories": {
     "doc": "docs"
   },
