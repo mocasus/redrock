@@ -22,9 +22,9 @@
 
 ## What is Redrock?
 
-You have a Telegram bot idea. Normally you'd need a VPS ($6/mo), configure nginx, set up webhooks, manage SSL certs, and keep a server running 24/7 just to echo "hello."
+You have a Telegram bot idea. Normally you'd need a VPS ($6/mo), nginx, webhooks, SSL — just to echo "hello."
 
-**Redrock makes it one command.** Your bot runs on Vercel's free tier — scales to zero when nobody's chatting, wakes up instantly on the next message. Zero cost, zero maintenance.
+**Redrock makes it one command.** Your bot runs on Vercel's free tier. Scales to zero when idle. Wakes instantly on the next message.
 
 ```bash
 npm i -g @mocasus/redrock
@@ -32,54 +32,69 @@ redrock init my-bot -t YOUR_BOT_TOKEN
 cd my-bot && redrock deploy
 ```
 
-Done. Open Telegram, send `/start`. Your bot is live.
+Done. Open Telegram, send `/start`. Bot is live.
 
 ---
 
-## Features
+## Usage
 
-- **⚡ 60-second deploy** — scaffold → deploy → webhook registered. One flow.
-- **🆓 100% free** — Vercel free tier: 100GB bandwidth, 500K function executions/month
-- **🐍 Python stdlib** — generated bot uses zero pip dependencies. Just works.
-- **🔗 Webhook default** — optimal for serverless. Auto-registers with Telegram API.
-- **🗄️ Built-in database** — Vercel KV, Supabase, or Firebase. One command setup.
-- **📋 Live logs** — `redrock logs --follow` streams requests in real-time.
-- **🔀 Mode switch** — toggle between webhook and polling anytime.
+After install, the `redrock` command is available globally:
+
+```bash
+$ redrock                    # show welcome banner
+$ redrock --help             # list all commands
+$ redrock --version          # v0.1.0
+```
+
+All commands:
+
+```
+redrock init <name>             scaffold a new bot
+redrock deploy                  push to Vercel + register webhook
+redrock logs --follow           stream live request logs
+redrock db init                 setup Vercel KV database
+redrock db migrate --to supabase   switch database provider
+redrock switch webhook|polling  change update mode
+```
 
 ---
 
 ## Quick Start
 
-### Prerequisites
-- Node.js 18+
-- [BotFather token](https://t.me/BotFather)
-- [Vercel account](https://vercel.com)
-
-### Install
+**Prerequisites:** Node.js 18+, [@BotFather](https://t.me/BotFather) token, [Vercel](https://vercel.com) account.
 
 ```bash
+# 1. Install globally
 npm i -g @mocasus/redrock
-```
 
-### Create & Deploy
-
-```bash
-# Scaffold a new bot
+# 2. Create a bot
 redrock init my-bot -t YOUR_BOT_TOKEN
 
-# Deploy to Vercel
+# 3. Deploy
 cd my-bot
-vercel login        # first time only
+vercel login          # first time only
 redrock deploy
 ```
 
-That's it. Open Telegram and send `/start` to your bot.
+That's it. Send `/start` to your bot on Telegram.
+
+---
+
+## Features
+
+| | |
+|---|---|
+| ⚡ **60-second deploy** | scaffold → deploy → webhook. One flow. |
+| 🆓 **100% free** | Vercel free tier: 100GB bandwidth, 500K exec/month |
+| 🐍 **Python stdlib** | Zero pip deps. Generated bot just works. |
+| 🔗 **Webhook default** | Auto-registers with Telegram API. |
+| 🗄️ **Built-in database** | Vercel KV, Supabase, Firebase. `redrock db init`. |
+| 📋 **Live logs** | `redrock logs --follow` streams in real-time. |
+| 🔀 **Mode switch** | Toggle webhook ↔ polling anytime. |
 
 ---
 
 ## Project Structure
-
-After `redrock init`, you get:
 
 ```
 my-bot/
@@ -90,33 +105,15 @@ my-bot/
 └── .env.example
 ```
 
-The webhook handler receives Telegram updates, Vercel runs it on the edge, and you never touch a server.
-
----
-
-## Commands
-
-```
-redrock init <name>             scaffold a new bot
-redrock deploy                  push to Vercel + register webhook
-redrock logs --follow           stream live request logs
-redrock logs --json --status-code 500   filter errors
-redrock db init                 setup Vercel KV database
-redrock db migrate --to supabase   switch database provider
-redrock switch webhook|polling  change update mode
-```
-
 ---
 
 ## Database
-
-Add persistence to your bot with one command:
 
 ```bash
 redrock db init
 ```
 
-This provisions a Vercel KV store, injects environment variables, and generates `api/db.py`:
+Provisions Vercel KV, injects env vars, generates `api/db.py`:
 
 ```python
 from api.db import db
@@ -126,13 +123,11 @@ count = db.incr("visits")   # → 1
 users = db.get("user:123")  # auto-deserializes JSON
 ```
 
-Three backends supported:
-
 | Provider | Free Tier | Best For |
 |----------|-----------|----------|
-| **Vercel KV** (default) | 256 MB | Key-value, counters, cache |
-| **Supabase** | 500 MB PostgreSQL | Relational data, complex queries |
-| **Firebase Firestore** | 1 GB | Real-time sync, NoSQL |
+| **Vercel KV** | 256 MB | Key-value, counters |
+| **Supabase** | 500 MB PostgreSQL | Relational data |
+| **Firebase** | 1 GB | Real-time sync |
 
 ---
 
@@ -140,28 +135,18 @@ Three backends supported:
 
 | | VPS | Redrock |
 |---|---|---|
-| **Price** | $6+/month | $0 |
-| **Setup** | 30-60 min | 60 seconds |
-| **Maintenance** | You handle OS, nginx, certs, updates | None |
-| **Scaling** | Manual | Auto (Vercel edge) |
-| **Idle cost** | Paying anyway | Scales to zero |
-
----
-
-## Framework Support
-
-| Framework | Language | Status |
-|-----------|----------|--------|
-| **python-telegram-bot** | Python | ✅ Default |
-| grammY | TypeScript | Coming soon |
-| Telegraf | JavaScript | Coming soon |
+| **Price** | $6+/mo | **$0** |
+| **Setup** | 30-60 min | **60 sec** |
+| **Maintenance** | OS, nginx, certs | **None** |
+| **Scaling** | Manual | **Auto (Vercel)** |
+| **Idle cost** | Paying | **$0** |
 
 ---
 
 ## Documentation
 
 - [Setup Guide](docs/README.md) — full walkthrough
-- [▶️ Full demo video](docs/demo.mp4) — 24-second showcase
+- [▶️ Demo video](docs/demo.mp4) — 24s showcase
 
 ---
 
@@ -172,5 +157,10 @@ MIT
 ---
 
 <p align="center">
-  <sub>v0.1.0 · <a href="https://github.com/mocasus/redrock">GitHub</a> · <a href="https://www.npmjs.com/package/@mocasus/redrock">npm</a> · MIT</sub>
+  <sub>
+    v0.1.0 ·
+    <a href="https://github.com/mocasus/redrock">GitHub</a> ·
+    <a href="https://www.npmjs.com/package/@mocasus/redrock">npm</a> ·
+    MIT
+  </sub>
 </p>

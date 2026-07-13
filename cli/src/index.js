@@ -1,11 +1,65 @@
 #!/usr/bin/env node
 const { program } = require('commander');
+const chalk = require('chalk');
 const pkg = require('../../package.json');
 
+// ── ASCII Banner ──
+const BANNER = [
+  '    ╔═══════════════════════════════════════╗',
+  '    ║                                       ║',
+  '    ║   ██████╗ ███████╗██████╗ ██████╗  ██████╗  ██████╗██╗  ██╗',
+  '    ║   ██╔══██╗██╔════╝██╔══██╗██╔══██╗██╔═══██╗██╔════╝██║ ██╔╝',
+  '    ║   ██████╔╝█████╗  ██║  ██║██████╔╝██║   ██║██║     █████╔╝ ',
+  '    ║   ██╔══██╗██╔══╝  ██║  ██║██╔══██╗██║   ██║██║     ██╔═██╗ ',
+  '    ║   ██║  ██║███████╗██████╔╝██║  ██║╚██████╔╝╚██████╗██║  ██╗',
+  '    ║   ╚═╝  ╚═╝╚══════╝╚═════╝ ╚═╝  ╚═╝ ╚═════╝  ╚═════╝╚═╝  ╚═╝',
+  '    ║                                       ║',
+  '    ║   Deploy Telegram bots to Vercel      ║',
+  '    ║   No VPS. No fees. One command.        ║',
+  '    ╚═══════════════════════════════════════╝',
+].join('\n');
+
+function printBanner() {
+  const lines = BANNER.split('\n');
+  lines.forEach((line, i) => {
+    if (i === 0 || i === lines.length - 1) {
+      console.log(chalk.hex('#C83C28')(line));
+    } else if (i >= 2 && i <= 7) {
+      console.log(chalk.hex('#DC5537')(line));
+    } else if (i === 9 || i === 10) {
+      console.log(chalk.hex('#FF9070')(line));
+    } else {
+      console.log(chalk.hex('#C83C28')(line));
+    }
+  });
+}
+
+// ── No args? Show banner + hint ──
+const args = process.argv.slice(2);
+const hasArgs = args.length > 0;
+const skipBanner = args.includes('--no-banner');
+
+if (!hasArgs) {
+  printBanner();
+  console.log('');
+  console.log(chalk.dim('  Try'), chalk.cyan('redrock --help'), chalk.dim('for all commands'));
+  console.log(chalk.dim('  Or'), chalk.cyan('redrock init my-bot -t <token>'), chalk.dim('to get started'));
+  console.log('');
+  process.exit(0);
+}
+
+// ── CLI Setup ──
 program
   .name('redrock')
   .description('Deploy Telegram bots to Vercel in 60 seconds 🚀')
-  .version(pkg.version);
+  .version(pkg.version)
+  .option('--no-banner', 'Skip welcome banner');
+
+// Add banner before help text
+program.addHelpText('beforeAll', () => {
+  if (skipBanner) return '';
+  return chalk.hex('#DC5537')(BANNER) + '\n';
+});
 
 program
   .command('init [name]')
