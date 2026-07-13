@@ -1,6 +1,6 @@
 {
   "name": "@mocasus/redrock",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Deploy Telegram bots to Vercel in 60 seconds. No VPS, no monthly fees.",
   "main": "index.js",
   "scripts": {
