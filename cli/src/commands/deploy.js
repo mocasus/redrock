@@ -35,6 +35,15 @@ module.exports = async function deploy(opts = {}) {
     return;
   }
 
+  // Warn if user has custom vercel.json (don't overwrite)
+  const config = JSON.parse(fs.readFileSync('redrock.json', 'utf8'));
+  if (fs.existsSync('vercel.json')) {
+    const existing = JSON.parse(fs.readFileSync('vercel.json', 'utf8'));
+    if (existing.functions || existing.env || existing.builds) {
+      console.log(chalk.yellow('⚠️  Custom vercel.json detected — Redrock will merge, not overwrite.'));
+    }
+  }
+
   // Check if vercel CLI is installed
   try {
     execSync('vercel --version', { stdio: 'pipe' });
@@ -44,7 +53,6 @@ module.exports = async function deploy(opts = {}) {
   }
 
   // Load config
-  const config = JSON.parse(fs.readFileSync('redrock.json', 'utf8'));
   const token = config.tokens?.primary || process.env.BOT_TOKEN;
 
   if (!token) {

@@ -47,7 +47,17 @@ module.exports = async function init(name = 'my-redrock-bot', opts = {}) {
   // Create .env.example
   fs.writeFileSync(
     path.join(projectDir, '.env.example'),
-    `BOT_TOKEN=${token}\n# BOT_TOKEN_2=your_second_bot_token\n`
+`# Bot token from @BotFather (https://t.me/BotFather)
+BOT_TOKEN=${token}
+# Optional second bot token (max 2)
+# BOT_TOKEN_2=your_second_bot_token_here
+
+# Database (optional — uncomment to use)
+# VERCEL_KV_URL=
+# SUPABASE_URL=
+# SUPABASE_KEY=
+# FIREBASE_PROJECT_ID=
+`
   );
 
   // Create redrock.json (config)
